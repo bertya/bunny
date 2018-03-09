@@ -32,7 +32,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <div className="container">
-            <h1 className="App-title">Welcome : { this.props.authedUser.displayName }</h1>
+            <h1 className="App-title">Welcome : { this.props.authedUser ? this.props.authedUser.displayName : 'Guest' }</h1>
           </div>
         </header>
         <BrowserRouter>
