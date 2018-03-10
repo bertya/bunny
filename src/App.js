@@ -32,7 +32,8 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <div className="container">
-            <h1 className="App-title">Welcome : { this.props.authedUser ? this.props.authedUser.displayName : 'Guest' }</h1>
+            <h1 className="App-title">Bunny</h1>
+            <p>Welcome : { this.props.authedUser ? this.props.authedUser.displayName : 'Guest' }</p>
           </div>
         </header>
         <BrowserRouter>
@@ -45,6 +46,9 @@ class App extends Component {
             </Switch>
           </div>
         </BrowserRouter>
+        <footer className="g-footer">
+          Bunny 2018
+        </footer>
       </div>
     );
   }

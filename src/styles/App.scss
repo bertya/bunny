@@ -5,9 +5,15 @@
 }
 
 .App-header {
-  background-color: #222;
   padding: 20px;
-  color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.App-header {
+  p {
+    margin: 0;
+    color: rgba(0,0,0,0.5);
+  }
 }
 
 .App-title {
@@ -30,30 +36,17 @@
 
 @import 'bs_scss/bootstrap.scss';
 @import 'custom/_ace.scss';
+@import 'custom/_comments.scss';
+@import 'custom/_form.scss';
+@import 'custom/_recorder.scss';
+@import 'custom/_post.scss';
 
-.badge-wrapper {
-  position: relative;
-  height: 100%;
-}
 
-.comment-badge {
-  position: absolute;
-  left: 0;
-  font-size: 12px;
-  background-color: firebrick;
-  color:#fff;
-  height: 16px;
-  width: 16px;
-  border-radius: 100%;
+.g-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  margin-top: 100px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
 }
 
-#show_editor,
-#new_editor {
-  border: 1px solid #eee;
-}
-
-.comment-wrap {
-  max-height: 355px;
-  overflow: auto;
-}

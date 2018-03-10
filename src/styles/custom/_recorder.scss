@@ -1,0 +1,38 @@
+.m-audio {
+  width: 400px;
+}
+
+.m-audio__wrap {
+  display: flex;
+  flex-flow: row wrap;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-sizing: content-box;
+  width: 400px;
+  border-radius: 4px;
+}
+
+.m-audio audio {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.m-audio__timer {
+  width: 50px;
+
+  div {
+    width: 100%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+  }
+}
+
+.m-audio__wave {
+  width: 350px;
+}
+
+.m-audio__wave .sound-wave {
+  width: 100%;
+  vertical-align: top;
+}

@@ -11,10 +11,10 @@ export function fetchPosts() {
   };
 }
 
-export function createPost(values, user, cb) {
+export function createPost(values, audioBlob, user, cb) {
   return {
     type: CREATE_POST,
-    payload: postsService.createPost(values, user, cb)
+    payload: postsService.createPost(values, audioBlob, user, cb)
   };
 }
 

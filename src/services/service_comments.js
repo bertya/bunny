@@ -43,5 +43,13 @@ function createComment(postId,lineNumber,values, user, cb) {
   // return request;
 }
 
+function fetchGeneralComments() {
+
+}
+
+function createGeneralComment() {
+  
+}
+
 
 export default commentsService;

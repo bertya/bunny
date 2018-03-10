@@ -3,9 +3,12 @@
   height: 80px; }
 
 .App-header {
-  background-color: #222;
   padding: 20px;
-  color: white; }
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
+
+.App-header p {
+  margin: 0;
+  color: rgba(0, 0, 0, 0.5); }
 
 .App-title {
   font-size: 1.5em; }
@@ -6011,21 +6014,6 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
   .hidden-print {
     display: none !important; } }
 
-.badge-wrapper {
-  position: relative;
-  height: 100%; }
-
-.comment-badge {
-  position: absolute;
-  left: 0;
-  font-size: 12px;
-  background-color: firebrick;
-  color: #fff;
-  height: 16px;
-  width: 16px;
-  border-radius: 100%;
-  text-align: center; }
-
 #show_editor,
 #new_editor {
   border: 1px solid #eee; }
@@ -6033,3 +6021,61 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 .comment-wrap {
   max-height: 355px;
   overflow: auto; }
+
+.comment-general {
+  width: 100%; }
+
+.comment-general h3 {
+  font-size: 20px;
+  font-weight: 400; }
+
+.form-textarea {
+  resize: none; }
+
+.m-audio {
+  width: 400px; }
+
+.m-audio__wrap {
+  display: flex;
+  flex-flow: row wrap;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-sizing: content-box;
+  width: 400px;
+  border-radius: 4px; }
+
+.m-audio audio {
+  display: inline-flex;
+  vertical-align: middle; }
+
+.m-audio__timer {
+  width: 50px; }
+  .m-audio__timer div {
+    width: 100%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center; }
+
+.m-audio__wave {
+  width: 350px; }
+
+.m-audio__wave .sound-wave {
+  width: 100%;
+  vertical-align: top; }
+
+.o-post__meta {
+  width: 100%; }
+  .o-post__meta audio {
+    width: 100%; }
+  .o-post__meta p {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px; }
+
+.g-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  margin-top: 100px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center; }

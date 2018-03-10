@@ -7,7 +7,7 @@ import AceEditor from 'react-ace';
 import _ from 'lodash';
 
 import CommentBox from '../containers/comment_box';
-import LineCounter from '../components/line_counter';
+import GeneralComment from '../containers/general_comment';
 
 class PostShow extends Component {
 
@@ -49,6 +49,14 @@ class PostShow extends Component {
     return output;
   }
 
+  renderAudio(post) {
+    if (post.audioUrl !== undefined) {
+      return (
+        <audio src={post.audioUrl} controls></audio>
+      );
+    }
+  }
+
   render() {
     const { post } = this.props;
 
@@ -79,6 +87,11 @@ class PostShow extends Component {
                   editorProps={{$blockScrolling: true}}
                   annotations={annotations}
                 />
+                <div className="o-post__meta">
+                  {this.renderAudio(post)}
+                  <p>Notes:<br/>{post.note}</p>
+                </div>
+                <GeneralComment selected={this.props.match.params.id} />
               </div>
             </div>
             <div className="col">
