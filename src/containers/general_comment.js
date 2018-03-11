@@ -7,7 +7,6 @@ import _ from 'lodash';
 
 class GeneralComment extends Component {
   componentDidMount() {
-    console.log('gcm', this.props.postId);
     this.props.fetchGeneralComments(this.props.postId);
   }
 

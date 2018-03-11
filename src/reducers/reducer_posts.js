@@ -13,7 +13,6 @@ export default function(state = {}, action) {
     // console.log(action.payload);
     return { ...state, [action.payload.key] : action.payload.val() };
   case CREATE_COMMENT:
-    console.log(action.payload);
     return { ...state, [action.payload.key] : action.payload.val() };
   default:
     return state;

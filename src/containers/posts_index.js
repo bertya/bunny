@@ -53,7 +53,6 @@ class PostIndex extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     posts: state.posts,
     authedUser: state.authedUser

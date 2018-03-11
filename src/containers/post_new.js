@@ -54,7 +54,6 @@ class PostNew extends Component {
       const value = editor.getValue();
       onBlur(value);
     };
-    console.log(field);
 
     return (
       <div className={className}>
@@ -81,7 +80,6 @@ class PostNew extends Component {
 
   onSubmit(values) {
     this.props.createPost(values, this.state.blob, this.props.authedUser, (postId)=>{
-      console.log('21212');
       this.props.history.push(`/posts/${postId}`);
     });
   }
@@ -93,7 +91,6 @@ class PostNew extends Component {
     });
 
     this.countDown = setInterval(()=>{
-      console.log(this.state.timer);
       if (this.state.timer === 0) {
         clearInterval(this.countDown);
       }
