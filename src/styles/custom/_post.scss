@@ -11,3 +11,19 @@
     border-radius: 4px;
   }
 }
+
+.badge-pill {
+  text-transform: capitalize;
+}
+
+.badge-mode--javascript {
+  background-color: #F2D444;
+}
+
+.badge-mode--c_cpp {
+  background-color: #5386C8;
+}
+
+.badge-mode--java {
+  background-color: #D7001A;
+}

@@ -16,11 +16,13 @@ class PostIndex extends Component {
 
   renderPosts() {
     return _.map(this.props.posts, (post, key) => {
+      const badgeClass = `badge badge-primary badge-pill badge-mode--${post.mode ? post.mode : "java"}`;
       return (
-        <li key={key} className="list-group-item list-group-item-action">
+        <li key={key} className="list-group-item list-group-item-action d-flex justify-content-between">
           <Link to={`/posts/${key}`}>
             {post.title}
           </Link>
+          <span className={badgeClass}>{post.mode ? post.mode : 'java'}</span>
         </li>
       );
     });

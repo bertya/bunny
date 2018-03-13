@@ -6018,6 +6018,19 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 #new_editor {
   border: 1px solid #eee; }
 
+.ace_gutter-cell.ace_info {
+  position: relative;
+  background-image: none !important; }
+  .ace_gutter-cell.ace_info:before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    height: 8px;
+    width: 8px;
+    border-radius: 100%;
+    background-color: #1EBA88; }
+
 .comment-wrap {
   max-height: 355px;
   overflow: auto; }
@@ -6028,6 +6041,13 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 .comment-general h3 {
   font-size: 20px;
   font-weight: 400; }
+
+.m-commentbox__body {
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: 10px;
+  margin-bottom: 0px;
+  padding-top: 10px;
+  border-top: 1px solid #eeeeee; }
 
 .form-textarea {
   resize: none; }
@@ -6072,6 +6092,18 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     padding: 20px;
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 4px; }
+
+.badge-pill {
+  text-transform: capitalize; }
+
+.badge-mode--javascript {
+  background-color: #F2D444; }
+
+.badge-mode--c_cpp {
+  background-color: #5386C8; }
+
+.badge-mode--java {
+  background-color: #D7001A; }
 
 .g-footer {
   border-top: 1px solid rgba(0, 0, 0, 0.15);

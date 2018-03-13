@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import { ReactMic } from 'react-mic';
 import AceEditor from 'react-ace';
 import 'brace/mode/java';
-import 'brace/theme/xcode';
+import 'brace/mode/javascript'
+import 'brace/mode/c_cpp'
+import 'brace/theme/tomorrow';
 
 import { createPost } from '../actions/action_posts'; 
 
@@ -16,7 +18,14 @@ class PostNew extends Component {
       record : false,
       blob : null,
       timer : 90,
+      mode : 'java',
     };
+  }
+
+  onSelectChange(e) {
+    this.setState({
+      mode: e.target.value
+    });
   }
 
   renderInput(field) {
@@ -34,6 +43,25 @@ class PostNew extends Component {
     );
   }
 
+  renderSelect(field) {
+    const className = 'form-group';
+    console.log('???')
+    // this.setState({
+    //   mode: field.input.value
+    // });
+
+    return (
+      <div className={className}>
+        <label>{field.label}</label>
+        <select {...field.input} className="form-control">
+          <option value="java">Java</option>
+          <option value="javascript">JavaScript</option>
+          <option value="c_cpp">C++</option>
+        </select>
+      </div>
+    );
+  }
+
 
   renderNote(field) {
     return (
@@ -47,7 +75,7 @@ class PostNew extends Component {
     );
   }
 
-  renderEditor(field) {
+  renderEditor(field, props) {
     const className = 'form-group';
     const aceOnBlur = (onBlur) => (_event, editor) => {
       if (!editor) return;
@@ -64,8 +92,8 @@ class PostNew extends Component {
           {...field.input}
         /> */}
         <AceEditor
-          mode="java"
-          theme="xcode"
+          mode={field.currentMode}
+          theme="tomorrow"
           name="new_editor"
           width="100%"
           // onChange={onChange}
@@ -79,6 +107,7 @@ class PostNew extends Component {
   }
 
   onSubmit(values) {
+    values.mode = this.state.mode;
     this.props.createPost(values, this.state.blob, this.props.authedUser, (postId)=>{
       this.props.history.push(`/posts/${postId}`);
     });
@@ -126,9 +155,16 @@ class PostNew extends Component {
             component={this.renderInput}
           />
           <Field
+            label="Mode"
+            name="mode"
+            component={this.renderSelect}
+            onChange={this.onSelectChange.bind(this)}
+          />
+          <Field
             label="Code"
             name="code"
             component={this.renderEditor}
+            currentMode = {this.state.mode}
           />
           <Field
             label="Note"

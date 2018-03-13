@@ -65,20 +65,22 @@ class PostShow extends Component {
     }
     // console.log(post);
     let annotations = this.processAnotation(post.comments);
+    const badgeClass = `mb-3 badge badge-primary badge-pill badge-mode--${post.mode ? post.mode : "java"}`;
 
     return (
       <div>
-        <h1 className="mt-5 mb-2">{post.title}</h1>
-        <Link to={'/'} className="btn btn-secondary mb-2">
-            Home
+        <Link to={'/'} className="btn btn-secondary mt-2">
+            Back
         </Link>
+        <h1 className="mt-2 mb-0">{post.title}</h1>
+        <span className={badgeClass}>{post.mode ? post.mode : 'java'}</span>
         <div className="container">
           <div className="row">
             <div className="col-8">
               <div className="row">
                 <AceEditor
-                  mode="java"
-                  theme="xcode"
+                  mode={post.mode ? post.mode : 'java'}
+                  theme="tomorrow"
                   name="show_editor"
                   width="100%"
                   value = {post.code}

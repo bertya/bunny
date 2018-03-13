@@ -22,7 +22,7 @@ class CommentBox extends Component {
       return (
         <li key={key} className="list-group-item">
           <div className="w-100">{time.toLocaleString()} by {comment.user.name}</div>
-          <p>{comment.content}</p>
+          <p className="m-commentbox__body">{comment.content}</p>
         </li>
       );
     });

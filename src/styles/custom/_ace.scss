@@ -6,3 +6,19 @@
 #new_editor {
   border: 1px solid #eee;
 }
+
+.ace_gutter-cell.ace_info {
+  position: relative;
+  background-image: none !important;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    height: 8px;
+    width: 8px;
+    border-radius: 100%;
+    background-color: #1EBA88;
+  }
+}
