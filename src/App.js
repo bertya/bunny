@@ -7,6 +7,8 @@ import './styles/App.css';
 import PostsIndex from './containers/posts_index';
 import PostNew from './containers/post_new';
 import PostShow from './containers/post_show';
+import UserHead from './containers/user_head';
+
 import authService from './services/service_auth';
 import { updateAuthedStatus } from './actions/action_auth';
 
@@ -15,14 +17,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     authService.isLoggedIn() === true
       ? <Component {...props} />
       : <Redirect to='/' />
-  )}/>
+  )} />
 );
 
 class App extends Component {
 
   componentDidMount() {
     // this.props.updateAuthedStatus();
-    authService.watch((user)=>{
+    authService.watch((user) => {
       this.props.updateAuthedStatus(user);
     });
   }
@@ -32,8 +34,10 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <div className="container">
-            <h1 className="App-title">Bunny</h1>
-            <p>Welcome : { this.props.authedUser ? this.props.authedUser.displayName : 'Guest' }</p>
+            <div className="row align-items-center justify-content-between no-neg">
+              <h1 className="App-title">Bunni</h1>
+              <UserHead />
+            </div>
           </div>
         </header>
         <BrowserRouter>
@@ -47,7 +51,7 @@ class App extends Component {
           </div>
         </BrowserRouter>
         <footer className="g-footer">
-          Bunny 2018
+          Bunni 2018
         </footer>
       </div>
     );
@@ -60,4 +64,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect( mapStateToProps ,{updateAuthedStatus})(App);
+export default connect(mapStateToProps, { updateAuthedStatus })(App);

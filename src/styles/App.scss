@@ -17,7 +17,10 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 2em;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 0;
 }
 
 .App-intro {
@@ -40,6 +43,7 @@
 @import 'custom/_form.scss';
 @import 'custom/_recorder.scss';
 @import 'custom/_post.scss';
+@import 'custom/_user.scss';
 
 
 .g-footer {
@@ -50,3 +54,7 @@
   text-align: center;
 }
 
+.no-neg {
+  margin-left: 0;
+  margin-right: 0;
+}

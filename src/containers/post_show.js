@@ -14,7 +14,7 @@ class PostShow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected : {}
+      selected: {}
     };
   }
 
@@ -26,9 +26,9 @@ class PostShow extends Component {
   test(selection) {
     this.props.fetchComments(this.id, selection.selectionAnchor.row);
     this.setState({
-      selected : {
-        id : this.id,
-        line : selection.selectionAnchor.row
+      selected: {
+        id: this.id,
+        line: selection.selectionAnchor.row
       }
     });
   }
@@ -36,8 +36,8 @@ class PostShow extends Component {
   processAnotation(commentsObj) {
     // console.log(commentsObj);
     let output = [];
-    _.forEach(commentsObj,(value, key)=>{
-      if (value == undefined) return;
+    _.forEach(commentsObj, (value, key) => {
+      if (value == undefined || key === 'general') return;
       output.push({
         row: key,
         column: 0,
@@ -64,13 +64,13 @@ class PostShow extends Component {
       return <div>Loading...</div>;
     }
     // console.log(post);
-    let annotations = this.processAnotation(post.comments);
     const badgeClass = `mb-3 badge badge-primary badge-pill badge-mode--${post.mode ? post.mode : "java"}`;
-
+    let annotations = this.processAnotation(post.comments);
+    console.log(annotations);
     return (
       <div>
-        <Link to={'/'} className="btn btn-secondary mt-2">
-            Back
+        <Link to={'/'} className="btn btn-outline-secondary mt-2">
+          Back
         </Link>
         <h1 className="mt-2 mb-0">{post.title}</h1>
         <span className={badgeClass}>{post.mode ? post.mode : 'java'}</span>
@@ -83,21 +83,22 @@ class PostShow extends Component {
                   theme="tomorrow"
                   name="show_editor"
                   width="100%"
-                  value = {post.code}
+                  value={post.code}
                   onSelectionChange={this.test.bind(this)}
                   readOnly
-                  editorProps={{$blockScrolling: true}}
+                  editorProps={{ $blockScrolling: true }}
+                  setOptions={{ useWorker: false }}
                   annotations={annotations}
                 />
                 <div className="o-post__meta">
                   {this.renderAudio(post)}
-                  <p>Notes:<br/>{post.note}</p>
+                  <p>Notes:<br />{post.note}</p>
                 </div>
                 <GeneralComment selected={this.props.match.params.id} />
               </div>
             </div>
             <div className="col">
-              <CommentBox selected={this.state.selected}/>
+              <CommentBox selected={this.state.selected} />
             </div>
           </div>
         </div>
@@ -108,8 +109,8 @@ class PostShow extends Component {
 
 function mapStateToProps({ posts }, ownProps) {
   return {
-    post : posts[ownProps.match.params.id],
-    selected : {}
+    post: posts[ownProps.match.params.id],
+    selected: {}
   };
 }
 

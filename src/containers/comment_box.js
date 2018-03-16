@@ -29,19 +29,24 @@ class CommentBox extends Component {
   }
 
   renderTextArea(field) {
+    const { meta: { touched, error } } = field;
+    let klass = `form-control ${touched && error ? 'is-invalid' : ''}`;
     return (
       <div className="form-group">
         <label htmlFor="content">Leave a comment</label>
         <textarea
-          className="form-control"
+          className={klass}
           {...field.input}
         ></textarea>
+        <div className="invalid-feedback">
+          {touched ? error : ''}
+        </div>
       </div>
     );
   }
 
   onSubmit(values) {
-    this.props.createComment(this.props.postId, this.props.line, values, this.props.authedUser, ()=>{
+    this.props.createComment(this.props.postId, this.props.line, values, this.props.authedUser, () => {
       this.props.reset();
       this.props.fetchComments(this.props.postId, this.props.line);
     });
@@ -60,14 +65,14 @@ class CommentBox extends Component {
             name="content"
             component={this.renderTextArea}
           />
-          <button type="submit" className="btn btn-primary">Submit</button>
+          <button type="submit" className="btn btn-dark">Submit</button>
         </form>
       );
     } else {
       return (
         <div>
           <div>Please login to comment</div>
-          <button className="btn btn-primary" onClick={this.googleLogin.bind(this)}>Login</button>
+          <button className="btn btn-dark" onClick={this.googleLogin.bind(this)}>Login</button>
         </div>
       );
     }
@@ -95,6 +100,16 @@ class CommentBox extends Component {
   }
 }
 
+function validate(values) {
+  const errors = {};
+
+  if (!values.content) {
+    errors.content = 'Cannot be empty';
+  }
+
+  return errors;
+}
+
 function mapStateToProps(state, ownProps) {
   return {
     comments: state.comments,
@@ -105,6 +120,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default reduxForm({
+  validate,
   form: 'CommentNewForm'
 })(
   connect(mapStateToProps, { createComment, fetchComments, login })(CommentBox)

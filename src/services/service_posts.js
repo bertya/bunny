@@ -44,12 +44,30 @@ function createPost(values, audioBlob, user, cb) {
         values.audioUrl = snapshot.downloadURL;
         return newPostRef.set(values);
       })
-      .then(()=>{
+      .then(() => {
+        let userData = {};
+        userData.commentsTotal = 0;
+        userData.commentsRead = 0;
+        userData.title = values.title;
+        userData.postID = newPostRef.key;
+        const newUserPostEntryRef = db.ref(`/user/${user.uid}/posts/`).push();
+        return newUserPostEntryRef.set(userData);
+      })
+      .then(() => {
         cb(newPostRef.key);
       });
   } else {
     request = newPostRef.set(values)
-      .then(()=>{
+      .then(() => {
+        let userData = {};
+        userData.commentsTotal = 0;
+        userData.commentsRead = 0;
+        userData.title = values.title;
+        userData.postID = newPostRef.key;
+        const newUserPostEntryRef = db.ref(`/user/${user.uid}/posts/`).push();
+        return newUserPostEntryRef.set(userData);
+      })
+      .then(() => {
         cb(newPostRef.key);
       });
   }

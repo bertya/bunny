@@ -9,16 +9,16 @@ import 'brace/mode/javascript'
 import 'brace/mode/c_cpp'
 import 'brace/theme/tomorrow';
 
-import { createPost } from '../actions/action_posts'; 
+import { createPost } from '../actions/action_posts';
 
 class PostNew extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      record : false,
-      blob : null,
-      timer : 90,
-      mode : 'java',
+      record: false,
+      blob: null,
+      timer: 90,
+      mode: 'java',
     };
   }
 
@@ -30,15 +30,19 @@ class PostNew extends Component {
 
   renderInput(field) {
     const className = 'form-group';
-
+    const { meta: { touched, error } } = field;
+    let klass = `form-control ${touched && error ? 'is-invalid' : ''}`;
     return (
       <div className={className}>
         <label>{field.label}</label>
         <input
-          className="form-control"
+          className={klass}
           type="text"
           {...field.input}
         />
+        <div className="invalid-feedback">
+          {touched ? error : ''}
+        </div>
       </div>
     );
   }
@@ -76,7 +80,8 @@ class PostNew extends Component {
   }
 
   renderEditor(field, props) {
-    const className = 'form-group';
+    const { meta: { touched, error } } = field;
+    const className = `form-group ${touched && error ? 'is-invalid' : ''}`;
     const aceOnBlur = (onBlur) => (_event, editor) => {
       if (!editor) return;
       const value = editor.getValue();
@@ -86,11 +91,6 @@ class PostNew extends Component {
     return (
       <div className={className}>
         <label>{field.label}</label>
-        {/* <textarea
-          className="form-control"
-          type="text"
-          {...field.input}
-        /> */}
         <AceEditor
           mode={field.currentMode}
           theme="tomorrow"
@@ -99,16 +99,19 @@ class PostNew extends Component {
           // onChange={onChange}
           // value={this.state.code}
           onBlur={aceOnBlur(field.input.onBlur)}
-          value = {field.input.value}
-          editorProps={{$blockScrolling: true}}
+          value={field.input.value}
+          editorProps={{ $blockScrolling: true }}
         />
+        <div className="invalid-feedback">
+          {touched ? error : ''}
+        </div>
       </div>
     );
   }
 
   onSubmit(values) {
     values.mode = this.state.mode;
-    this.props.createPost(values, this.state.blob, this.props.authedUser, (postId)=>{
+    this.props.createPost(values, this.state.blob, this.props.authedUser, (postId) => {
       this.props.history.push(`/posts/${postId}`);
     });
   }
@@ -119,7 +122,7 @@ class PostNew extends Component {
       timer: 90
     });
 
-    this.countDown = setInterval(()=>{
+    this.countDown = setInterval(() => {
       if (this.state.timer === 0) {
         clearInterval(this.countDown);
       }
@@ -128,7 +131,7 @@ class PostNew extends Component {
       })
     }, 1000);
   }
- 
+
   stopRecording = () => {
     this.setState({
       record: false
@@ -136,7 +139,7 @@ class PostNew extends Component {
 
     clearInterval(this.countDown);
   }
- 
+
   onStop = (recordedBlob) => {
     this.setState({
       blob: recordedBlob
@@ -164,7 +167,7 @@ class PostNew extends Component {
             label="Code"
             name="code"
             component={this.renderEditor}
-            currentMode = {this.state.mode}
+            currentMode={this.state.mode}
           />
           <Field
             label="Note"
@@ -175,26 +178,26 @@ class PostNew extends Component {
             <label>Add audio to explain your thoughts</label>
             <div className="m-audio__wrap">
               <div className="m-audio__timer">
-              <div >{this.state.timer}s</div>
+                <div >{this.state.timer}s</div>
               </div>
               <div className="m-audio__wave">
-              <ReactMic
-                record={this.state.record}
-                className="sound-wave"
-                onStop={this.onStop}
-                strokeColor="#484848"
-                backgroundColor="#FFFFFF" />
+                <ReactMic
+                  record={this.state.record}
+                  className="sound-wave"
+                  onStop={this.onStop}
+                  strokeColor="#484848"
+                  backgroundColor="#FFFFFF" />
               </div>
             </div>
             <div className="btn-group mt-1">
               <button onClick={this.startRecording} type="button" className="btn btn-success btn-sm">Start</button>
               <button onClick={this.stopRecording} type="button" className="btn btn-danger btn-sm">Stop</button>
             </div>
-            <audio className="mt-1" controls src={this.state.blob ? this.state.blob.blobURL : '' }></audio>
+            <audio className="mt-1" controls src={this.state.blob ? this.state.blob.blobURL : ''}></audio>
           </div>
           <div className="mt-5">
-          <button type="submit" className="btn btn-primary">Submit</button>
-          <Link to={'/'} className="btn btn-secondary ml-2">
+            <button type="submit" className="btn btn-dark">Submit</button>
+            <Link to={'/'} className="btn btn-outline-secondary ml-2">
               Home
           </Link>
           </div>
@@ -204,6 +207,20 @@ class PostNew extends Component {
   }
 }
 
+function validate(values) {
+  const errors = {};
+
+  if (!values.title) {
+    errors.title = 'Cannot be empty';
+  }
+
+  if (!values.code) {
+    errors.code = 'Cannot be empty';
+  }
+
+  return errors;
+}
+
 function mapStateToProps(state) {
   return {
     authedUser: state.authedUser
@@ -211,6 +228,7 @@ function mapStateToProps(state) {
 }
 
 export default reduxForm({
+  validate,
   form: 'PostNewForm'
 })(
   connect(mapStateToProps, { createPost })(PostNew)

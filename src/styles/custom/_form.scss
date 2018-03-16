@@ -1,3 +1,13 @@
 .form-textarea {
   resize: none;
 }
+
+.form-group.is-invalid {
+  .invalid-feedback {
+    display: block;
+  }
+
+  #new_editor {
+    border-color: #dc3545;
+  }
+}

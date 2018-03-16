@@ -14,15 +14,30 @@ class PostIndex extends Component {
     this.props.fetchPosts();
   }
 
+  commentsCounter(comments) {
+    let total = 0;
+    if (comments) {
+      total = _.reduce(comments, function (sum, n) {
+        return sum + n;
+      });
+    }
+    return total;
+  }
+
   renderPosts() {
     return _.map(this.props.posts, (post, key) => {
       const badgeClass = `badge badge-primary badge-pill badge-mode--${post.mode ? post.mode : "java"}`;
       return (
         <li key={key} className="list-group-item list-group-item-action d-flex justify-content-between">
-          <Link to={`/posts/${key}`}>
-            {post.title}
-          </Link>
-          <span className={badgeClass}>{post.mode ? post.mode : 'java'}</span>
+          <div>
+            <Link to={`/posts/${key}`}>
+              {post.title}
+            </Link>
+            <span className="badge badge-primary badge-pill ml-2">{this.commentsCounter(post.comments)}</span>
+          </div>
+          <div>
+            <span className={badgeClass}>{post.mode ? post.mode : 'java'}</span>
+          </div>
         </li>
       );
     });
@@ -39,13 +54,9 @@ class PostIndex extends Component {
   render() {
     return (
       <div className="mt-5 mb-5">
-        <div className="btn-group">
-          <button className="btn btn-primary" onClick={this.googleLogin.bind(this)}>Login</button>
-          <button className="btn btn-primary" onClick={this.googleLogout.bind(this)}>Log out</button>
-          <Link to={'/post-new'} className="btn btn-success">
-            new
-          </Link>
-        </div>
+        <Link to={'/post-new'} className="btn btn-success">
+          New post
+        </Link>
         <ul className="list-group mt-5">
           {this.renderPosts()}
         </ul>
