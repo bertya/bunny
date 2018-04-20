@@ -10,6 +10,10 @@
   margin: 0;
   color: rgba(0, 0, 0, 0.5); }
 
+.App-header a, .App-header a:hover {
+  color: #000;
+  text-decoration: none; }
+
 .App-title {
   font-size: 2em;
   text-transform: uppercase;
@@ -6153,7 +6157,11 @@ a.text-dark:hover, a.text-dark:focus {
 .badge-mode--java {
   background-color: #D7001A; }
 
+.badge-pill.hide {
+  display: none; }
+
 .m-userhead {
+  position: relative;
   text-align: center; }
 
 .m-userhead img {
@@ -6164,6 +6172,11 @@ a.text-dark:hover, a.text-dark:focus {
 
 .m-userhead .dropdown {
   display: inline-block; }
+
+.m-userhead .badge {
+  position: absolute;
+  right: -10px;
+  top: 0px; }
 
 .g-footer {
   border-top: 1px solid rgba(0, 0, 0, 0.15);

@@ -11,7 +11,7 @@ import { commentsCounter } from "../helpers";
 //   console.log(snapshot.val());
 // });
 
-class PostIndex extends Component {
+class UserPosts extends Component {
   componentDidMount() {
     this.props.fetchPosts();
   }
@@ -21,6 +21,15 @@ class PostIndex extends Component {
       const badgeClass = `badge badge-primary badge-pill badge-mode--${
         post.mode ? post.mode : "java"
       }`;
+      if (post.user.uid !== this.props.authedUser.uid) {
+        return;
+      }
+      let newComments =
+        commentsCounter(post.comments) -
+        (post.user.readed ? post.user.readed : 0);
+      const countClass = `badge badge-danger badge-pill ml-2 ${
+        newComments === 0 ? "hide" : ""
+      }`;
       return (
         <li
           key={key}
@@ -28,9 +37,7 @@ class PostIndex extends Component {
         >
           <div>
             <Link to={`/posts/${key}`}>{post.title}</Link>
-            <span className="badge badge-primary badge-pill ml-2">
-              {commentsCounter(post.comments)}
-            </span>
+            <span className={countClass}>{newComments}</span>
           </div>
           <div>
             <span className={badgeClass}>{post.mode ? post.mode : "java"}</span>
@@ -40,20 +47,9 @@ class PostIndex extends Component {
     });
   }
 
-  googleLogin() {
-    this.props.login();
-  }
-
-  googleLogout() {
-    this.props.logout();
-  }
-
   render() {
     return (
       <div className="mt-5 mb-5">
-        <Link to={"/post-new"} className="btn btn-success">
-          New post
-        </Link>
         <ul className="list-group mt-5">{this.renderPosts()}</ul>
       </div>
     );
@@ -68,5 +64,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { fetchPosts, login, logout })(
-  PostIndex
+  UserPosts
 );

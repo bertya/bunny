@@ -1,4 +1,5 @@
 .m-userhead {
+  position: relative;
   text-align: center;
 }
 
@@ -11,4 +12,10 @@
 
 .m-userhead .dropdown {
   display: inline-block;
+}
+
+.m-userhead .badge {
+  position: absolute;
+  right: -10px;
+  top: 0px;
 }
