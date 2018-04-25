@@ -1,11 +1,17 @@
 .comment-wrap {
   max-height: 355px;
   overflow: auto;
+  .list-group-item p {
+    white-space: pre-line;
+  }
 }
 
 
 .comment-general {
   width: 100%;
+  .comment-wrap {
+    max-height: none;
+  }
 }
 
 .comment-general h3 {
